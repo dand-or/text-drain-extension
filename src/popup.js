@@ -1,8 +1,8 @@
 import "./popup.css";
+import { NodeCreator } from "./models/NodeCreator";
 
 (() => {
   const CHROME_STORAGE_KEY = "items";
-  const testDom = document.querySelector("#test");
 
   const storeItems = (value, cb) => {
     chrome.storage.local.set({ [CHROME_STORAGE_KEY]: value }, () => {
@@ -18,8 +18,9 @@ import "./popup.css";
     });
   }
 
-  const drawDom = (items) => {
-    testDom.textContent = JSON.stringify(items);
+  const createNodes = (items) => {
+    //testDom.textContent = JSON.stringify(items);
+    new NodeCreator(items).create();
   }
 
   chrome.runtime.sendMessage(
@@ -31,7 +32,7 @@ import "./popup.css";
     },
     response => {
       const items = response.items;
-      items.length ? storeItems(response.items, drawDom) : restoreItems(drawDom);
+      items.length ? storeItems(response.items, createNodes) : restoreItems(createNodes);
     }
   );
 })();

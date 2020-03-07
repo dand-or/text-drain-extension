@@ -6,12 +6,23 @@
     <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <div class="app">
-    <div id="test"></div>
-  </div>
-
+  <header>
+    <h1 class="title">TextDrainExtension</h1>
+  </header>
+  <main id="app" class="app">
+  </main>
+  <template id="main_component_template">
+    <section>
+      <h2 class="subtitle"></h2>
+      <p>Press the button to copy the text</p>
+      <div class="buttons flex"></div>
+    </section>
+    <hr class="divider" />
+  </template>
+  <template id="btn_component_template">
+    <button></button>
+  </template>
   <script src="popup.js"></script>
-
   <!--
     This HTML file opens when you click on icon from the toolbar.
 
