@@ -2,6 +2,7 @@ export class NodeCreator{
   static SHADOW_ROOT_ID = "#app";
   static MAIN_TEMPLATE_ID = "#main_component_template"
   static BUTTON_TEMPLATE_ID = "#btn_component_template"
+  static COPIED_DIV_ID = "#copied"
   static MAIN_TEMPLATE_STYLE = `
   *:focus {
     outline: none;
@@ -46,6 +47,7 @@ export class NodeCreator{
     this._shadowRoot = this._appElement.attachShadow({mode:"open"});
     this._mainTemplate = document.querySelector(NodeCreator.MAIN_TEMPLATE_ID);
     this._btnTemplate = document.querySelector(NodeCreator.BUTTON_TEMPLATE_ID);
+    this._copiedElement = document.querySelector(NodeCreator.COPIED_DIV_ID);
   }
 
   create() {
@@ -58,12 +60,37 @@ export class NodeCreator{
         subtitle.textContent = key;
 
         const buttons = cloneMain.querySelector("div.buttons");
-        console.log(item);
-        console.log(item[key]);
         item[key].map(txt => {
           const cloneButton = document.importNode(this._btnTemplate.content,true);
           const button = cloneButton.querySelector("button");
           button.textContent = txt;
+
+          const copyAction = () => {
+            navigator.clipboard.writeText(txt).then(() =>{
+              // this._copiedElement.classList.remove("show-copied");
+              this._copiedElement.animate([
+                {
+                  opacity: 0,
+                  width: "100%",
+                  zIndex: -1
+                },
+                {
+                  opacity: 1,
+                  width: "110%",
+                  zIndex: 1000
+                },
+                {
+                  opacity: 0,
+                  width: "300%",
+                  zIndex: -1
+                }
+              ], 600, "ease-in");
+            }, () => {
+              alert("copy failed. please retry.");
+            });
+          }
+          button.addEventListener("click", copyAction);
+
           buttons.appendChild(button);
         });
         
