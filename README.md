@@ -15,3 +15,6 @@ My Chrome Extension
 
 Suggestions and pull requests are welcomed!.
 
+## wishlist
+
+https://www.amazon.jp/hz/wishlist/ls/1WVWE1MGKG2DK?ref_=wl_share

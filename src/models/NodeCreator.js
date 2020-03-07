@@ -46,7 +46,16 @@ export class NodeCreator {
   }`;
 
   constructor(items) {
-    this._items = items;
+    // first title, second URL_info, third h1-h6, others
+    const sortedItems = [];
+    items.filter(item => Object.keys(item)[0] === "title").map(x => sortedItems.push(x));
+    items.filter(item => Object.keys(item)[0] === "URL_info").map(x => sortedItems.push(x));
+    items.filter(item => new RegExp(/h[0-6]/g).test(Object.keys(item)[0])).map(x => sortedItems.push(x));
+    items.filter(item => (Object.keys(item)[0] !== "title") && (Object.keys(item)[0] !== "URL_info") && (!new RegExp(/h[0-6]/g).test(Object.keys(item)[0]))).map(x => sortedItems.push(x));
+    console.log(items);
+    console.log(sortedItems);
+    this._items = sortedItems;
+
     this._appElement = document.querySelector(NodeCreator.SHADOW_ROOT_ID);
     this._shadowRoot = this._appElement.attachShadow({ mode: "open" });
     this._mainTemplate = document.querySelector(NodeCreator.MAIN_TEMPLATE_ID);
