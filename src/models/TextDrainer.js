@@ -54,7 +54,7 @@ export class TextDrainer {
           textArray.push(nl.textContent.trim().replace(/\r?\n/g, ""));
         });
         if (!textArray.length) return;
-        results.push({ [k]: Array.from(new Set(textArray)) });
+        results.push({ [k]: Array.from(new Set(textArray)) }); // Array.from(new Set(textArray) -> this delete duplicate
       });
 
       // finally, push the page url info.
