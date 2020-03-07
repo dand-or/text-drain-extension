@@ -28,6 +28,9 @@ export class NodeCreator {
     border: none;
     padding:20px;
     margin: 10px; 20px;
+    max-width: 440px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   button:hover {
     border-radius: 10px;
