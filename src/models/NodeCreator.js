@@ -3,6 +3,9 @@ export class NodeCreator{
   static MAIN_TEMPLATE_ID = "#main_component_template"
   static BUTTON_TEMPLATE_ID = "#btn_component_template"
   static MAIN_TEMPLATE_STYLE = `
+  *:focus {
+    outline: none;
+  }
   .flex {
     display: flex;
     justify-content: space-around;
@@ -23,6 +26,18 @@ export class NodeCreator{
     border: none;
     padding:20px;
     margin: 10px; 20px;
+  }
+  button:hover {
+    border-radius: 10px;
+    background: linear-gradient(145deg, #fdffff, #d4d8d9);
+    box-shadow:  15px 15px 40px #c9cccd, 
+                -15px -15px 40px #ffffff;
+  }
+  button:active {
+    border-radius: 10px;
+    background: linear-gradient(145deg, #d4d8d9, #fdffff);
+    box-shadow:  15px 15px 40px #c9cccd, 
+                -15px -15px 40px #ffffff;
   }`;
 
   constructor(items){
