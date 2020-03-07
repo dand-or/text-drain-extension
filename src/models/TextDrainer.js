@@ -12,8 +12,9 @@ export class TextDrainer {
         const nodeList = document.querySelectorAll(k);
         if (!nodeList.length) return;
         nodeList.forEach((nl) => {
+          if (nl.children.length > 1) return;
           if (!nl.textContent.trim().length) return;
-          textArray.push(nl.textContent.trim().replace(/\r?\n\s+/g, ''));
+          textArray.push(nl.textContent.trim().replace(/\r?\n/g, ''));
         });
         if (!textArray.length) return;
         results.push({[k]: textArray});
