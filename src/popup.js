@@ -11,17 +11,17 @@ import { NodeCreator } from "./models/NodeCreator";
     console.log("stored");
   };
 
-  const restoreItems = (cb) => {
+  const restoreItems = cb => {
     console.log("restored");
-    chrome.storage.local.get([CHROME_STORAGE_KEY], (value) => { 
-      cb(value[CHROME_STORAGE_KEY]); 
+    chrome.storage.local.get([CHROME_STORAGE_KEY], value => {
+      cb(value[CHROME_STORAGE_KEY]);
     });
-  }
+  };
 
-  const createNodes = (items) => {
+  const createNodes = items => {
     //testDom.textContent = JSON.stringify(items);
     new NodeCreator(items).create();
-  }
+  };
 
   chrome.runtime.sendMessage(
     {
@@ -32,7 +32,9 @@ import { NodeCreator } from "./models/NodeCreator";
     },
     response => {
       const items = response.items;
-      items.length ? storeItems(response.items, createNodes) : restoreItems(createNodes);
+      items.length
+        ? storeItems(response.items, createNodes)
+        : restoreItems(createNodes);
     }
   );
 })();

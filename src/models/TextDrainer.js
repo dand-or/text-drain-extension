@@ -1,23 +1,60 @@
 export class TextDrainer {
-  constructor(){
+  constructor() {
     this._pageTextItems = [];
-    this._keys = ["a","address","b","blockquote","button","caption","data","datalist","dd","dl","dt","em","h1","h2","h3","h4","h5","h6","i","input","label","li","link","meta","option","p","ruby","span","strong","td","textarea","thead","title","tr","tt","u"];
+    this._keys = [
+      "a",
+      "address",
+      "b",
+      "blockquote",
+      "button",
+      "caption",
+      "data",
+      "datalist",
+      "dd",
+      "dl",
+      "dt",
+      "em",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "i",
+      "input",
+      "label",
+      "li",
+      "link",
+      "meta",
+      "option",
+      "p",
+      "ruby",
+      "span",
+      "strong",
+      "td",
+      "textarea",
+      "thead",
+      "title",
+      "tr",
+      "tt",
+      "u"
+    ];
     this.drain();
   }
-  drain(){
+  drain() {
     const correctTextContent = () => {
       const results = [];
       this._keys.map(k => {
         const textArray = [];
         const nodeList = document.querySelectorAll(k);
         if (!nodeList.length) return;
-        nodeList.forEach((nl) => {
+        nodeList.forEach(nl => {
           if (nl.children.length > 1) return;
           if (!nl.textContent.trim().length) return;
-          textArray.push(nl.textContent.trim().replace(/\r?\n/g, ''));
+          textArray.push(nl.textContent.trim().replace(/\r?\n/g, ""));
         });
         if (!textArray.length) return;
-        results.push({[k]: Array.from(new Set(textArray)) });
+        results.push({ [k]: Array.from(new Set(textArray)) });
       });
 
       // finally, push the page url info.
@@ -31,7 +68,8 @@ export class TextDrainer {
         const paths = location.pathname.split("/");
         paths.forEach(path => {
           if (path.length) urlInfo.push(path);
-          if (path.split("=").length) path.split("=").forEach(x => x.length ? urlInfo.push(x) : null);
+          if (path.split("=").length)
+            path.split("=").forEach(x => (x.length ? urlInfo.push(x) : null));
         });
       }
       if (location.search) {
@@ -46,13 +84,13 @@ export class TextDrainer {
         }
       }
       if (location.port) urlInfo.push(location.port);
-      results.push({"URL_info": Array.from(new Set(urlInfo))});
-      
+      results.push({ URL_info: Array.from(new Set(urlInfo)) });
+
       return results;
-    }
+    };
     this._pageTextItems = correctTextContent();
   }
-  getPageTextItems() { 
+  getPageTextItems() {
     return this._pageTextItems;
   }
-};
+}

@@ -68,7 +68,11 @@ export class NodeCreator {
       anchor.addEventListener("click", () => {
         this._shadowRoot
           .querySelector("#" + key)
-          .scrollIntoView({ block: "center", inline: "center", behavior: "smooth" });
+          .scrollIntoView({
+            block: "center",
+            inline: "center",
+            behavior: "smooth"
+          });
       });
       document.querySelector("nav ul").appendChild(cloneNavItem);
 

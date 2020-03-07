@@ -5,18 +5,18 @@ const textDrainer = new TextDrainer();
 const textPassAction = () => {
   chrome.runtime.sendMessage(
     {
-      type: 'DRAINED',
+      type: "DRAINED",
       payload: {
-        message: textDrainer.getPageTextItems(),
-      },
+        message: textDrainer.getPageTextItems()
+      }
     },
     response => {}
-  )
+  );
 };
 
 textPassAction(); // initial exec(per page open)
 
-// when tab activated, catch a message from background and 
-chrome.runtime.onMessage.addListener((message) => {
+// when tab activated, catch a message from background and
+chrome.runtime.onMessage.addListener(message => {
   if (message.type === "TAB_ACTIVATED") textPassAction();
 });
