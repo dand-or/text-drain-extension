@@ -55,9 +55,10 @@
 ## Install
 
 - Waiting for release to chrome web store
-- how to chrome://extension in develop
+- When you develop in chrome://extension, do like this and install unpacked extension ("build" directory) in Chrome
   ```
   $ git clone https://github.com/dand-or/text-drain-extension.git
+  $ npm install
   $ npm run watch
   ```
 
