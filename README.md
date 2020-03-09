@@ -54,7 +54,7 @@
 
 ## Install
 
-- Waiting for release to chrome web store
+- You can install from [Chrome Web Store](https://chrome.google.com/webstore/detail/lkdehaolnbgbhgajpfpkoobhfpoaeclj/publish-accepted?authuser=0&hl=ja)
 - When you develop in chrome://extension, do like this and install unpacked extension ("build" directory) in Chrome
   ```
   $ git clone https://github.com/dand-or/text-drain-extension.git
