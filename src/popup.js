@@ -19,22 +19,26 @@ import { NodeCreator } from "./models/NodeCreator";
   };
 
   const createNodes = items => {
-    //testDom.textContent = JSON.stringify(items);
+    if (items === void 0) return NodeCreator.noItems();
     new NodeCreator(items).create();
   };
 
-  chrome.runtime.sendMessage(
-    {
-      type: "FROM_POPUP",
-      payload: {
-        message: "I am from text-drain-extension Popup."
+  const load = () => {
+    chrome.runtime.sendMessage(
+      {
+        type: "FROM_POPUP",
+        payload: {
+          message: "I am from text-drain-extension Popup."
+        }
+      },
+      response => {
+        const items = response.items;
+        items.length
+          ? storeItems(response.items, createNodes)
+          : restoreItems(createNodes);
       }
-    },
-    response => {
-      const items = response.items;
-      items.length
-        ? storeItems(response.items, createNodes)
-        : restoreItems(createNodes);
-    }
-  );
+    );
+  }
+
+  load();
 })();

@@ -3,11 +3,13 @@ var items = [];
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "DRAINED") {
     items = request.payload.message;
+    sendResponse({});
   } else if (request.type === "FROM_POPUP") {
     sendResponse({
       items
     });
   }
+  return true;
 });
 
 chrome.tabs.onActivated.addListener(() => {

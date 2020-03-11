@@ -46,6 +46,13 @@ export class NodeCreator {
   }`;
 
   constructor(items) {
+    this._appElement = document.querySelector(NodeCreator.SHADOW_ROOT_ID);
+    this._shadowRoot = this._appElement.attachShadow({ mode: "open" });
+    this._mainTemplate = document.querySelector(NodeCreator.MAIN_TEMPLATE_ID);
+    this._btnTemplate = document.querySelector(NodeCreator.BUTTON_TEMPLATE_ID);
+    this._navTemplate = document.querySelector(NodeCreator.NAV_TEMPLATE_ID);
+    this._copiedElement = document.querySelector(NodeCreator.COPIED_DIV_ID);
+
     // first title, second URL_info, third h1-h6, others
     const sortedItems = [];
     items.filter(item => Object.keys(item)[0] === "title").map(x => sortedItems.push(x));
@@ -55,13 +62,6 @@ export class NodeCreator {
     console.log(items);
     console.log(sortedItems);
     this._items = sortedItems;
-
-    this._appElement = document.querySelector(NodeCreator.SHADOW_ROOT_ID);
-    this._shadowRoot = this._appElement.attachShadow({ mode: "open" });
-    this._mainTemplate = document.querySelector(NodeCreator.MAIN_TEMPLATE_ID);
-    this._btnTemplate = document.querySelector(NodeCreator.BUTTON_TEMPLATE_ID);
-    this._navTemplate = document.querySelector(NodeCreator.NAV_TEMPLATE_ID);
-    this._copiedElement = document.querySelector(NodeCreator.COPIED_DIV_ID);
   }
 
   create() {
@@ -140,5 +140,9 @@ export class NodeCreator {
       this._shadowRoot.appendChild(style);
       this._shadowRoot.appendChild(cloneMain);
     });
+  }
+
+  static noItems() {
+    document.querySelector(NodeCreator.SHADOW_ROOT_ID).attachShadow({ mode: "open" }).textContent = "No items. Please re-activate tabs.";
   }
 }
